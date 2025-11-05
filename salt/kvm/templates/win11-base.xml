@@ -1,0 +1,33 @@
+<domain type='kvm'>
+  <name>win11-base</name>
+  <memory unit='GiB'>4</memory>
+  <vcpu placement='static'>4</vcpu>
+  <os>
+    <type arch='x86_64' machine='q35'>hvm</type>
+    <loader readonly='yes' type='pflash'>/usr/share/OVMF/OVMF_CODE.secboot.fd</loader>
+    <nvram>/var/lib/libvirt/qemu/nvram/win11-base_VARS.fd</nvram>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <vmport state='off'/>
+  </features>
+  <devices>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='/var/lib/libvirt/images/Windows11.qcow2'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <interface type='network'>
+      <source network='default'/>
+      <model type='virtio'/>
+    </interface>
+    <tpm model='tpm-tis'>
+      <backend type='emulator' version='2.0'>
+        <device path='/var/lib/libvirt/swtpm/win11-base'/>
+      </backend>
+    </tpm>
+    <graphics type='vnc' port='-5900' listen='0.0.0.0'/>
+  </devices>
+</domain>
+

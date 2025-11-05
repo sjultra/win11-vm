@@ -1,0 +1,13 @@
+# Managed by Salt – QEMU configuration
+user = "root"
+group = "root"
+
+# Enable TPM emulation via swtpm
+swtpm_user = "root"
+swtpm_group = "root"
+
+# Secure boot firmware path (for OVMF)
+nvram = [
+  "/usr/share/OVMF/OVMF_CODE.secboot.fd:/usr/share/OVMF/OVMF_VARS.secboot.fd"
+]
+
